@@ -1,0 +1,32 @@
+{
+  "name": "registry-tools",
+  "version": "1.0.0",
+  "description": "Simple node api for retrieving AD information",
+  "main": "./bin/registry-utils.js",
+  "bin": {
+    "registry-utils": "./bin/registry-utils.js"
+  },
+  "scripts": {
+    "tslint": "gulp tslint",
+    "install-typings": "gulp install-typings",
+    "build": "gulp clean tslint transpile",
+    "start": "node dist/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://beverts.visualstudio.com/DefaultCollection/Main/_git/docker-registry-tools"
+  },
+  "author": "Bailey Everts",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "del": "1.2.1",
+    "express": "~4.13.3",
+    "gulp": "^3.9.0",
+    "gulp-sourcemaps": "~1.6.0",
+    "gulp-tsd": "0.0.4",
+    "gulp-tslint": "^3.3.0",
+    "gulp-typescript": "^2.9.0",
+    "typescript": "^1.6.2"
+  }
+}
