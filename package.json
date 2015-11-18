@@ -1,16 +1,15 @@
 {
   "name": "registry-tools",
   "version": "1.0.0",
-  "description": "Simple node api for retrieving AD information",
+  "description": "Registry CLI Tool",
   "main": "./bin/registry-utils.js",
   "bin": {
-    "registry-utils": "./bin/registry-utils.js"
+    "registry-utils": "./bin/registry.js"
   },
   "scripts": {
     "tslint": "gulp tslint",
     "install-typings": "gulp install-typings",
-    "build": "gulp clean tslint transpile",
-    "start": "node dist/app.js"
+    "build": "gulp clean tslint transpile"
   },
   "repository": {
     "type": "git",
