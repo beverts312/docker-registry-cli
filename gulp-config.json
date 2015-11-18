@@ -1,0 +1,29 @@
+{
+    "typeScriptSource": [
+        "bin/*.ts",
+        "src/**/*.ts"
+    ],
+    "typeScriptDefinitions": [
+        "typings/**/*.d.ts"
+    ],
+    "typeScriptSourceAndTests": [
+      "src/**/*.ts",
+        "bin/*.ts"      
+    ],
+    "allTypeScript": [
+        "src/**/*.ts",
+        "bin/*.ts",
+        "typings/**/*.d.ts"
+    ],
+    "typeScriptOutput": [
+        "src/**/*.ts",
+        "bin/*.ts"
+    ],
+    "javaScriptSource": [
+        "src/**/*.js",
+        "!src/**/*.map.js"
+    ],
+    "allTranspiledJavaScript": [
+        "build/**/*.js*"
+    ]
+}
