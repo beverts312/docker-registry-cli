@@ -3,28 +3,27 @@ import IRegistryWrapper = require('./interfaces/IRegistryWrapper');
 import ImageCatalog = require('./models/ImageCatalog');
 import TagsList = require('./models/TagsList');
 import Manifest = require('./models/Manifest');
+import Registry = require('./models/Registry');
+import Options = require('./models/Options');
 
 import https = require('https');
 
 class RegistryWrapper implements IRegistryWrapper {
-	url:string;
-   	port:number;
+	registry:Registry;
+   	options:Options;
 	   
-	constructor(url:string, port:number){
-		this.url = url;
-		this.port = port;
+	constructor(registry:Registry){
+		this.registry = registry;
+		this.options.host = this.registry.hostname;
+		this.options.port = this.registry.port;
+		this.options.rejectUnauthorized = false;
 	}
 	
 	getCatalog(callback:(err:Error, result:ImageCatalog)=>void){
-		var options = {
-  			host: this.url,
- 			port: this.port,
-  			path: '/v2/_catalog',
-  			method: 'GET',
-			rejectUnauthorized: false
-		};
+		this.options.path = '/v2/_catalog';
+  		this.options.method= 'GET';		
 
-		https.request(options, (res) => {
+		https.request(this.options, (res) => {
   			res.setEncoding('utf8');
 			var str = '';
   			res.on('data', (chunk) => {
@@ -37,15 +36,10 @@ class RegistryWrapper implements IRegistryWrapper {
 	}	
 	
 	getTags(image:string, callback:(err:Error, result:TagsList)=>void){
-		var options = {
-  			host: this.url,
- 			port: this.port,
-  			path: '/v2/' + image + '/tags/list',
-  			method: 'GET',
-			rejectUnauthorized: false
-		};
+		this.options.path = '/v2/' + image + '/tags/list';
+  		this.options.method = 'GET';
 		
-		https.request(options, (res) => {
+		https.request(this.options, (res) => {
   			res.setEncoding('utf8');
 			var str = '';
   			res.on('data', (chunk) => {
@@ -58,15 +52,10 @@ class RegistryWrapper implements IRegistryWrapper {
 	}
 	
 	getManifest(image:string, tag:string, callback:(err:Error, result:Manifest)=>void){
-		var options = {
-  			host: this.url,
- 			port: this.port,
-  			path: '/v2/' + image + '/manifests/' + tag,
-  			method: 'GET',
-			rejectUnauthorized: false
-		};
+		this.options.path = '/v2/' + image + '/manifests/' + tag;
+		this.options.method = 'GET';
 
-		https.request(options, (res) => {
+		https.request(this.options, (res) => {
   			res.setEncoding('utf8');
 			var str = '';
   			res.on('data', (chunk) => {
