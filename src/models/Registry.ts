@@ -5,7 +5,7 @@ class Registry {
 	public password:string;
 	
 	constructor(host:string, port:number, user:string, password:string){
-		this.host = host;
+		this.hostname = host;
 		this.port = port;
 		this.user = user;
 		this.password = password;
