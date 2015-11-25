@@ -39,3 +39,8 @@ gulp.task('transpile', ['clean'], function () {
         .pipe(sourceMaps.write(''))
         .pipe(gulp.dest(''));
 });
+gulp.task('add-shebangs', ['transpile'], function (){
+    return gulp.src(gulpConfig.executables)
+        .pipe(header('#!/usr/bin/env node\n'))
+        .pipe(gulp.dest('bin/'))
+});

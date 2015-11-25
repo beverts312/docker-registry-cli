@@ -8,7 +8,7 @@
   "scripts": {
     "tslint": "gulp tslint",
     "install-typings": "gulp install-typings",
-    "build": "gulp clean tslint transpile"
+    "build": "gulp clean tslint transpile add-shebangs"
   },
   "repository": {
     "type": "git",
