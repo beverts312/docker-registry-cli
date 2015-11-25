@@ -1,6 +1,7 @@
 import RegistryWrapper = require('../src/RegistryWrapper');
 import Manifest = require('../src/models/Manifest');
 import ImageCatalog = require('../src/models/ImageCatalog');
+import Registry = require('../src/models/Registry');
 
 module.exports = ((options: any) => {
     var image = options.image;
@@ -12,9 +13,9 @@ module.exports = ((options: any) => {
 });
 	
 function compareImage(name:string, tag:string, callback:(err:string, match:boolean)=>void){
-	var oma = new RegistryWrapper('registry-oma.fmr.com', 5000);
-	var mmk = new RegistryWrapper('registry-mmk.fmr.com', 5000);
-	var rtp = new RegistryWrapper('registry-rtp.fmr.com', 5000);
+	var oma = new RegistryWrapper(new Registry('registryomatwo.fmr.com', 5000, 'reguser', 'rqdLjupe3RR4A30HJl9a'));
+	var mmk = new RegistryWrapper(new Registry('registrymmk.fmr.com', 5000, 'reguser', 'rqdLjupe3RR4A30HJl9a'));
+	var rtp = new RegistryWrapper(new Registry('registryrtp.fmr.com', 5000, 'reguser', 'rqdLjupe3RR4A30HJl9a'));
 	oma.getManifest(name, tag, (err, omaResult)=>{
 		var omaImage = omaResult;
 		mmk.getManifest(name, tag, (err, mmkResult)=>{

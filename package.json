@@ -2,9 +2,8 @@
   "name": "registry-tools",
   "version": "1.0.0",
   "description": "Registry CLI Tool",
-  "main": "./bin/registry-utils.js",
   "bin": {
-    "registry-utils": "./bin/registry.js"
+    "registry": "./bin/registry.js"
   },
   "scripts": {
     "tslint": "gulp tslint",

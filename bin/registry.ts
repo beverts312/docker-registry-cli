@@ -8,3 +8,5 @@ program
 	.option('-i, --image <image>', 'The name of the image')
 	.option('-t, --tag <tag>', 'The image tag')
 	.action(require('./Compare'));
+	
+program.parse(process.argv);

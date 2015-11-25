@@ -4,6 +4,7 @@ class Options {
 	public path:string;
 	public method:string;
 	public rejectUnauthorized:boolean;
+	public auth:string;
 }
 
 export = Options;
