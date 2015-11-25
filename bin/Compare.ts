@@ -12,13 +12,12 @@ module.exports = ((options: any) => {
 	compareImage(image, tag, (err, match) => {
 		if(err){
 			console.log(err);
+			process.exit(1);
 		} else if( match ){
 			console.log("Images match");
+			process.exit(0);
 		}
-	});
-	
-	process.exit(0);
-	
+	});	
 });
 	
 function compareImage(name:string, tag:string, callback:(err:string, match:boolean)=>void){
