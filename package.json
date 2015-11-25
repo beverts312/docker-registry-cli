@@ -2,6 +2,7 @@
   "name": "registry-tools",
   "version": "1.0.0",
   "description": "Registry CLI Tool",
+  "main": "./bin/registry.js",
   "bin": {
     "registry": "./bin/registry.js"
   },

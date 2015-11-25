@@ -25,5 +25,8 @@
     ],
     "allTranspiledJavaScript": [
         "build/**/*.js*"
+    ],
+    "executables": [
+      "bin/registry.js"
     ]
 }
