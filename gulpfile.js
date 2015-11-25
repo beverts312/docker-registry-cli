@@ -7,6 +7,7 @@ var sourceMaps = require('gulp-sourcemaps');
 var tsd = require('gulp-tsd');
 var tslint = require('gulp-tslint');
 var del = require('del');
+var header = require('gulp-header');
 
 var gulpConfig = require('./gulp-config.json');
 

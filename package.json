@@ -21,6 +21,7 @@
     "del": "1.2.1",
     "express": "~4.13.3",
     "gulp": "^3.9.0",
+    "gulp-header": "^1.7.1",
     "gulp-sourcemaps": "~1.6.0",
     "gulp-tsd": "0.0.4",
     "gulp-tslint": "^3.3.0",
