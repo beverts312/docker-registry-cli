@@ -8,6 +8,15 @@ module.exports = ((options: any) => {
 	var tag = options.tag;
 	console.log('image: '+ image);
 	console.log('tag: ' + tag);
+	
+	compareImage(image, tag, (err, match) => {
+		if(err){
+			console.log(err);
+		} else if( match ){
+			console.log("Images match");
+		}
+	});
+	
 	process.exit(0);
 	
 });
