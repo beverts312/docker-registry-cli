@@ -21,20 +21,27 @@ module.exports = ((options: any) => {
 });
 	
 function compareImage(name:string, tag:string, callback:(err:string, match:boolean)=>void){
+	
 	var oma = new RegistryWrapper(new Registry('registryomatwo.fmr.com', 5000, 'reguser', 'rqdLjupe3RR4A30HJl9a'));
 	var mmk = new RegistryWrapper(new Registry('registrymmk.fmr.com', 5000, 'reguser', 'rqdLjupe3RR4A30HJl9a'));
 	var rtp = new RegistryWrapper(new Registry('registryrtp.fmr.com', 5000, 'reguser', 'rqdLjupe3RR4A30HJl9a'));
 	oma.getManifest(name, tag, (err, omaResult)=>{
-		var omaImage = omaResult;
-		mmk.getManifest(name, tag, (err, mmkResult)=>{
-			var mmkImage = mmkResult;
-			rtp.getManifest(name, tag, (err, rtpResult)=>{
-				var rtpImage = rtpResult;
-				compareImages(omaImage, mmkImage, rtpImage, (err, match)=>{
-					callback(err, match);
+		if(err){
+			console.log(err.message);
+		}
+		else {
+			var omaImage = omaResult;
+			console.log(omaImage.name);
+			mmk.getManifest(name, tag, (err, mmkResult)=>{
+				var mmkImage = mmkResult;
+				rtp.getManifest(name, tag, (err, rtpResult)=>{
+					var rtpImage = rtpResult;
+					compareImages(omaImage, mmkImage, rtpImage, (err, match)=>{
+						callback(err, match);
+					});
 				});
 			});
-		});
+		}
 	});
 }
 	

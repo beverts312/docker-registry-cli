@@ -14,7 +14,8 @@ class RegistryWrapper implements IRegistryWrapper {
 	   
 	constructor(registry:Registry){
 		this.registry = registry;
-		this.options.host = this.registry.hostname;
+		this.options = new Options();
+		this.options.host = this.registry.host;
 		this.options.port = this.registry.port;
 		this.options.rejectUnauthorized = false;
 		if(this.registry.user && this.registry.password){
