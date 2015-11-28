@@ -18,9 +18,7 @@ class RegistryWrapper implements IRegistryWrapper {
 		this.options.host = this.registry.host;
 		this.options.port = this.registry.port;
 		this.options.rejectUnauthorized = false;
-		if(this.registry.user && this.registry.password){
-			this.options.auth = this.registry.user + ':' + this.registry.password;			
-		}
+		this.options.auth = this.registry.user + ':' + this.registry.password;
 	}
 	
 	getCatalog(callback:(err:Error, result:ImageCatalog)=>void){
