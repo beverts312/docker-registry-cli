@@ -20,3 +20,4 @@ bin/**/*.js
 src/**/*.js
 
 .tsdrc
+bin/configuration.json
