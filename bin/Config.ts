@@ -9,19 +9,19 @@ class Config {
 	
 	constructor(){	}
 	
-	processCommand(arg:string, key:any, value:any){
+	processCommand(arg:string, key:string, args:any){
 		switch(arg){
 			case 'get':
 				this.getConfig(key);
 				break;
 			case 'set':
-				this.setConfig(key, value);
+				this.setConfig(key, args.value);
 				break;
 			case 'add':
 				this.addConfig(key);
 				break;
 			case 'remove':
-				this.removeConfig(key, value);
+				this.removeConfig(key, args.value);
 				break;
 			default:
 				console.log(arg + 'is an invalid option');
@@ -83,7 +83,7 @@ class Config {
 	
 	addConfig(key:string){
 		this.configuration = require('./configuration.json');
-		
+		console.log('TO DO');
 	}
 	
 	removeConfig(key:string, value:number){

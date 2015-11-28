@@ -26,11 +26,16 @@ program
 	});
 
 program
-	.command('config <action> <key> <value>')
+	.command('config <action> <key>')
 	.description('Gets or sets config values for the registry tool')
-	.action((action, key, value) => {
+	.option('-v, --value <value>', 'The value to set')
+	.option('-n, --hostname <hostname>', 'The hostname of the registry')
+	.option('-p, --port <port>', 'The port the registry listens on')
+	.option('-u, --user <user>', 'The registry user')
+	.option('-s, --password <password>', 'The password for the registry')
+	.action((action, key, args) => {
 		var config = new Config();
-		config.processCommand(action, key, value)
+		config.processCommand(action, key, args)
 	});
 	
 
