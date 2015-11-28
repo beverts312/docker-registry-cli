@@ -5,12 +5,18 @@ import Manifest = require('../src/models/Manifest');
 import Registry = require('../src/models/Registry');
 import RegistryWrapper =  require('../src/RegistryWrapper');
 
+
 class Basic {
 	registry:Registry;
 	wrapper:RegistryWrapper;
 	
 	constructor(){
-		this.registry = new Registry( 'beverts.cloudapp.net', 5000,'reguser','alIOUQfje3FyfPl');
+		var config = require('./configuration.json');
+		var regId = config.registry;
+		this.registry = new Registry(  	config.registries[regId].host,
+		 								config.registries[regId].port,
+										config.registries[regId].user,
+										config.registries[regId].password);
 		this.wrapper = new RegistryWrapper(this.registry);
 	}
 	  
@@ -24,6 +30,10 @@ class Basic {
 				break;
 			case 'manifest':
 				this.getManifest(args.image, args.tag);
+				break;
+			default:
+				console.log(resource + ' is an invalid option');
+				console.log('Use registry -h to see usage info');
 				break;		
 		}		
 	}
