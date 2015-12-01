@@ -29,7 +29,7 @@ program
 	.command('config <action> <key>')
 	.description('Gets or sets config values for the registry tool')
 	.option('-v, --value <value>', 'The value to set')
-	.option('-n, --hostname <hostname>', 'The hostname of the registry')
+	.option('-n, --host <host>', 'The hostname of the registry')
 	.option('-p, --port <port>', 'The port the registry listens on')
 	.option('-u, --user <user>', 'The registry user')
 	.option('-s, --password <password>', 'The password for the registry')

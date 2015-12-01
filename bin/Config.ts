@@ -18,7 +18,7 @@ class Config {
 				this.setConfig(key, args.value);
 				break;
 			case 'add':
-				this.addConfig(key);
+				this.addConfig(key, args);
 				break;
 			case 'remove':
 				this.removeConfig(key, args.value);
@@ -38,14 +38,10 @@ class Config {
 				console.log(regId + ': ' + this.configuration.registries[regId].host);
 				break;
 			case 'registries':
-				this.showRegistries();
+				this.displayRegistries();
 				break;
 			case 'compare':
-				console.log('ID		Host');
-				for(var i = 0; i < this.configuration.compare.length; i++){
-					var id = this.configuration.compare[i];
-					console.log(id + '		' + this.configuration.registries[id]);
-				}	
+				this.displayCompare()
 				break;
 			default:
 				console.log(key + ' is an invalid option');
@@ -65,7 +61,7 @@ class Config {
 				else {
 					console.log(value + ' is an invalid registry value.')
 					console.log('Please use an ID from the list below.');
-					this.showRegistries();
+					this.displayRegistries();
 				}
 				break;
 			case 'registries':
@@ -81,9 +77,24 @@ class Config {
 		}		
 	}
 	
-	addConfig(key:string){
+	addConfig(key:string, args:any){
 		this.configuration = require('./configuration.json');
-		console.log('TO DO');
+		switch(key){
+			case 'registry':
+				var reg = new Registry(args.host, args.port, args.user, args.password);
+				this.configuration.registries.push(reg);
+				this.updateConfiguration();
+				this.displayRegistries();
+				break;
+			case 'compare':
+				this.configuration.compare.push(args.value);
+				this.updateConfiguration();				
+				this.displayCompare();		
+				break;
+			default:
+				console.log('Cant add to ' + key);
+				break;		
+		}
 	}
 	
 	removeConfig(key:string, value:number){
@@ -102,10 +113,19 @@ class Config {
 		}		
 	}
 	
-	showRegistries(){
+	// Helpers
+	displayRegistries(){
 		console.log('ID		Host');
 		for(var i = 0; i < this.configuration.registries.length; i++){
 			console.log(i + '	' + this.configuration.registries[i].host);
+		}
+	}
+	
+	displayCompare(){
+		console.log('ID		Host');
+		for(var i = 0; i < this.configuration.compare.length; i++){
+			var id = this.configuration.compare[i];
+			console.log(id + '		' + this.configuration.registries[id]);
 		}
 	}
 	
@@ -114,7 +134,6 @@ class Config {
 			if(err){
 				console.log(err)
 			}
-			console.log('success');
 		});
 	}
 	
@@ -125,5 +144,7 @@ class Config {
 	removeCompare(key:number){
 		console.log('TO DO');
 	}
+	
+
 }
 export = Config;
