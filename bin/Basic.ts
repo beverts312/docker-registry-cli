@@ -16,7 +16,7 @@ class Basic {
 		this.registry = new Registry(  	config.registries[regId].host,
 		 								config.registries[regId].port,
 										config.registries[regId].user,
-										config.registries[regId].password);
+										new Buffer(config.registries[regId].password, 'base64').toString('ascii'));
 		this.wrapper = new RegistryWrapper(this.registry);
 	}
 	  

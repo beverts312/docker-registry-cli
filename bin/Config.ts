@@ -81,7 +81,7 @@ class Config {
 		this.configuration = require('./configuration.json');
 		switch(key){
 			case 'registry':
-				var reg = new Registry(args.host, args.port, args.user, args.password);
+				var reg = new Registry(args.host, args.port, args.user, new Buffer(args.password).toString('base64'));
 				this.configuration.registries.push(reg);
 				this.updateConfiguration();
 				this.displayRegistries();
