@@ -24,7 +24,8 @@
         "!src/**/*.map.js"
     ],
     "allTranspiledJavaScript": [
-        "build/**/*.js*"
+        "bin/**/*.js",
+        "src/**/*.js"
     ],
     "executables": [
       "bin/registry.js"
