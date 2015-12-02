@@ -2,7 +2,8 @@ import RegistryWrapper = require('../src/RegistryWrapper');
 import Manifest = require('../src/models/Manifest');
 import ImageCatalog = require('../src/models/ImageCatalog');
 import Registry = require('../src/models/Registry');
-
+import Configuration = require('../src/models/Configuration');
+		
 module.exports = ((options: any) => {
     var image = options.image;
 	var tag = options.tag;
@@ -21,49 +22,80 @@ module.exports = ((options: any) => {
 });
 	
 function compareImage(name:string, tag:string, callback:(err:string, match:boolean)=>void){
-	
-	var oma = new RegistryWrapper(new Registry('registryomatwo.fmr.com', 5000, 'reguser', 'rqdLjupe3RR4A30HJl9a'));
-	var mmk = new RegistryWrapper(new Registry('registrymmk.fmr.com', 5000, 'reguser', 'rqdLjupe3RR4A30HJl9a'));
-	var rtp = new RegistryWrapper(new Registry('registryrtp.fmr.com', 5000, 'reguser', 'rqdLjupe3RR4A30HJl9a'));
-	oma.getManifest(name, tag, (err, omaResult)=>{
-		if(err){
-			console.log(err.message);
-		}
-		else {
-			var omaImage = omaResult;
-			console.log(omaImage.name);
-			mmk.getManifest(name, tag, (err, mmkResult)=>{
-				var mmkImage = mmkResult;
-				rtp.getManifest(name, tag, (err, rtpResult)=>{
-					var rtpImage = rtpResult;
-					compareImages(omaImage, mmkImage, rtpImage, (err, match)=>{
-						callback(err, match);
-					});
-				});
-			});
-		}
-	});
-}
-	
-function compareImages(oma:Manifest, mmk:Manifest, rtp:Manifest, callback:(err:string, match:boolean)=>void){
-	if(oma.fsLayers.length == mmk.fsLayers.length){
-		if(oma.fsLayers.length == rtp.fsLayers.length){
-			for(var i = 0; i < oma.fsLayers.length; i++){
-				if(oma.fsLayers[i].blobSum == mmk.fsLayers[i].blobSum){
-					if(oma.fsLayers[i].blobSum == rtp.fsLayers[i].blobSum){
-						callback(null, true);
+	var config = <Configuration> require('./configuration.json');
+	if (config.compare.length < 2){
+		callback("Must have atleast 2 registries to compare", false);
+	}
+	else {
+		getImages(name, tag, config, (err, images) =>{
+			if(err.length > 0){
+				for(var i = 0; i < err.length; i++){
+					console.log(err[i]);
+				}
+				callback('Error getting images, more details above', false);
+			}
+			else{
+				for(var i = 0; i < images.length - 1; i++){
+					if(!compareImages(images[i], images[i + 1])){
+						callback('Image mismatch', false);
 					}
 				}
-				else {
-					callback('Layer digest mismatch', false);
-				}
+				callback(null, true)
 			}
+		});
+	}
+}
+
+function getImages(name:string, tag:string, config:Configuration, callback:(err:string[], images:Manifest[])=>void){
+	var id  = config.compare[0];
+	var images = [];
+	var errors = [];
+	
+	for(var i = 0; i < config.compare.length -1; i++){
+		var id = config.compare[i];
+		var reg = new RegistryWrapper(new Registry(	config.registries[id].host, 
+												config.registries[id].port, 
+												config.registries[id].user, 
+												new Buffer(config.registries[id].password, 'base64').toString('ascii')));
+		reg.getManifest(name, tag, (err, res)=>{
+			if(err){
+				errors.push(err.message);
+			}
+			else{
+				images.push(res);
+			}
+		});
+	}
+	var id = config.compare.length - 1;
+	var reg = new RegistryWrapper(new Registry(	config.registries[id].host, 
+												config.registries[id].port, 
+												config.registries[id].user, 
+												new Buffer(config.registries[id].password, 'base64').toString('ascii')));
+	reg.getManifest(name, tag, (err, res)=>{
+		if(err){
+			errors.push(err.message);
 		}
 		else{
-			callback('Layer count mismatch', false);					
+			images.push(res);
 		}
+		callback(errors, images);	
+	});			
+}
+
+function compareImages(one:Manifest, two:Manifest):boolean{
+	if(one.fsLayers.length == two.fsLayers.length){
+		for(var i = 0; i < one.fsLayers.length; i++){
+			if(one.fsLayers[i].blobSum != two.fsLayers[i].blobSum){
+				console.log('Layer digest mismatch');
+				console.log(one.fsLayers[i].blobSum);
+				console.log(two.fsLayers[i].blobSum);
+				return false;	
+			}
+		}
+		return true;
 	}
 	else{
-		callback('Layer count mismatch', false);	
+		console.log('Layer count mismatch')
+		return false;					
 	}
 }
