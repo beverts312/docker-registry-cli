@@ -15,9 +15,9 @@ program
 	.command('get <resource>')
 	.description(`
 	Get a resource:
-		catalog: List images in a repo
-		tags: Get all tags for an image in a repo, (requires -i to be set)
-		manifest: Gets manifest info for an image:tag in a repo (requires -i and -t)`)
+	catalog: List images in a repo
+	tags: Get all tags for an image in a repo, (requires -i to be set)
+	manifest: Gets manifest info for an image:tag in a repo (requires -i and -t)`)
 	.option('-i, --image <image>', 'The name of the image, ')
 	.option('-t, --tag <tag>', 'The image tag')
 	.action((resource, args) => {
