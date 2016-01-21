@@ -6,7 +6,14 @@ var tsc = require('gulp-typescript');
 var sourceMaps = require('gulp-sourcemaps');
 var tsd = require('gulp-tsd');
 var tslint = require('gulp-tslint');
+var jshint = require('gulp-jshint');
+var jscs = require('gulp-jscs');
+var mocha = require('gulp-mocha');
+var istanbul = require('gulp-istanbul');
+var coverageEnforcer = require('gulp-istanbul-enforcer');
+var browserOpen = require('gulp-open');
 var del = require('del');
+var Chai = require('chai');
 var header = require('gulp-header');
 
 var gulpConfig = require('./gulp-config.json');
@@ -44,4 +51,24 @@ gulp.task('add-shebangs', ['transpile'], function (){
     return gulp.src(gulpConfig.executables)
         .pipe(header('#!/usr/bin/env node\n'))
         .pipe(gulp.dest('bin/'))
+});
+gulp.task('run-unit-tests', ['transpile', 'add-shebangs'], function (cb) {
+    gulp.src(gulpConfig.javaScriptSource)
+    .pipe(istanbul({
+        "includeUntested": ["true"]
+    }))
+    .pipe(istanbul.hookRequire())
+    .on('finish', function () {
+        gulp.src(gulpConfig.javaScriptUnitTests)
+        .pipe(mocha({
+                timeout: 3000,
+				reporter: "mocha-multi", 
+				reporterOptions: gulpConfig.multiMochaReporterOptions
+            }))
+        .pipe(istanbul.writeReports({
+            "reporters": gulpConfig.istanbulReporters,
+             "dir": gulpConfig.istanbulUnitTestsCoverageFolder
+        }))
+        .on('end', cb);
+    });
 });
