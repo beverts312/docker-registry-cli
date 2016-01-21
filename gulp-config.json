@@ -38,5 +38,25 @@
     ],
     "executables": [
       "bin/registry.js"
-    ]
+    ],
+    "istanbulAllTestsCoverageFolder": "./test/coverage",
+    "istanbulUnitTestsCoverageFolder" : "./coverage/unit/",
+    "istanbulReporters": [ "lcov", "json", "text", "text-summary", "html" ],
+    "minimumStatementCoverageThreshold": "100",
+    "minimumBranchCoverageThreshold": "100",
+    "minimumLineCoverageThreshold": "100",
+    "minimumFunctionCoverageThreshold": "100",
+    "htmlUnitTestsCoverageReportFile": "./coverage/unit/index.html",
+    "htmlAllTestsCoverageReportFile": "./coverage/all/index.html",
+	"multiMochaReporterOptions": {
+		"xunit-file": { 
+			"stdout": "./xunit.xml",
+			"options": {
+				"verbose": true
+			}
+		},
+		"spec": {
+			"stdout": "-"
+		}
+	}
 }

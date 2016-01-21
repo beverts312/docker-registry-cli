@@ -19,7 +19,7 @@ describe('ConfigManager Suite -', ()=>{
     
     afterEach(()=>{
        configManager = null;
-       sandbox.restpre(); 
+       sandbox.restore(); 
     });
     
     describe('getRegistries -', () =>{

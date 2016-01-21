@@ -18,5 +18,11 @@ typings/*
 # Transpiled Java Script
 bin/**/*.js
 src/**/*.js
+test/**/*.js
 
 .tsdrc
+.jshintignore
+.jshintrc
+.validate.json
+xunit.xml
+coverage
