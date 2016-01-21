@@ -8,24 +8,33 @@
     ],
     "typeScriptSourceAndTests": [
       "src/**/*.ts",
-        "bin/*.ts"      
+       "bin/*.ts",
+       "test/**/*-tests.ts"      
     ],
     "allTypeScript": [
         "src/**/*.ts",
         "bin/*.ts",
+       "test/**/*-tests.ts",        
         "typings/**/*.d.ts"
     ],
     "typeScriptOutput": [
         "src/**/*.ts",
-        "bin/*.ts"
+        "bin/*.ts",
+       "test/**/*-tests.ts"        
     ],
     "javaScriptSource": [
         "src/**/*.js",
-        "!src/**/*.map.js"
+        "bin/**/*.js",
+        "!src/**/*.map.js",        
+        "!bin/**/*.map.js"
     ],
     "allTranspiledJavaScript": [
         "bin/**/*.js",
-        "src/**/*.js"
+        "src/**/*.js",
+        "test/**/*-tests.js"
+    ],
+    "javaScriptUnitTests": [
+        "test/**/*-tests.js"
     ],
     "executables": [
       "bin/registry.js"

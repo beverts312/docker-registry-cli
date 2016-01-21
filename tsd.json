@@ -19,6 +19,21 @@
     },
     "commander/commander.d.ts": {
       "commit": "c560ba6f0f55ce6f50e9d06e37b5bc0e2b9117b0"
+    },
+    "mocha/mocha.d.ts": {
+      "commit": "3a666d1bff92e944488c25599ec56a4937c17c4e"
+    },
+    "assertion-error/assertion-error.d.ts": {
+      "commit": "3a666d1bff92e944488c25599ec56a4937c17c4e"
+    },
+    "chai/chai.d.ts": {
+      "commit": "3a666d1bff92e944488c25599ec56a4937c17c4e"
+    },
+    "sinon/sinon.d.ts": {
+      "commit": "3a666d1bff92e944488c25599ec56a4937c17c4e"
+    },
+    "chalk/chalk.d.ts": {
+      "commit": "3a666d1bff92e944488c25599ec56a4937c17c4e"
     }
   }
 }
