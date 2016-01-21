@@ -1,5 +1,4 @@
 {
-	"registry" : 0,
-	"registries" : [],
-	"compare" : []
+	"currentRegistry" : 0,
+	"registries" : []
 }

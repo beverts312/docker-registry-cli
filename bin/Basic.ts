@@ -13,7 +13,8 @@ class Basic {
 	constructor(){
 		var config = require('./configuration.json');
 		var regId = config.registry;
-		this.registry = new Registry(  	config.registries[regId].host,
+		this.registry = new Registry(  	config.registries[regId].name,
+                                        config.registries[regId].host,
 		 								config.registries[regId].port,
 										config.registries[regId].user,
 										new Buffer(config.registries[regId].password, 'base64').toString('ascii'));

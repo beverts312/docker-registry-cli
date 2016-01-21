@@ -2,41 +2,34 @@
 
 import program = require('commander');
 import Basic = require('./Basic');
-import Config = require('./Config');
+import RegistriesManager = require('./RegistriesManager');
 
-program
-	.command('compare')
+var registriesManager = new RegistriesManager();                           
+
+program.command('compare <image> <tag>')
 	.description('Compares image in multiple repositories')
 	.option('-i, --image <image>', 'The name of the image')
 	.option('-t, --tag <tag>', 'The image tag')
 	.action(require('./Compare'));
 
-program
-	.command('get <resource>')
-	.description(`
-	Get a resource:
-	catalog: List images in a repo
-	tags: Get all tags for an image in a repo, (requires -i to be set)
-	manifest: Gets manifest info for an image:tag in a repo (requires -i and -t)`)
-	.option('-i, --image <image>', 'The name of the image, ')
-	.option('-t, --tag <tag>', 'The image tag')
+program.command('manifest <name> <tag>')
+	.description('Gets image manifest')
+	.option('-r, --registry-name <reg>', 'The name of the registry, defaults to ' + registriesManager.getDefaultRegistry())
 	.action((resource, args) => {
 		var basic = new Basic();
 		basic.processCommand(resource, args);
 	});
-
-program
-	.command('config <action> <key>')
-	.description('Gets or sets config values for the registry tool')
-	.option('-v, --value <value>', 'The value to set')
-	.option('-n, --host <host>', 'The hostname of the registry')
-	.option('-p, --port <port>', 'The port the registry listens on')
-	.option('-u, --user <user>', 'The registry user')
-	.option('-s, --password <password>', 'The password for the registry')
-	.action((action, key, args) => {
-		var config = new Config();
-		config.processCommand(action, key, args)
-	});
 	
-
+program.command('add <name> <hostname> <port> <user> <password>')
+    .description('Adds registry creds to config')
+    .action((name, hostname, port, user, password)=>{
+        registriesManager.addRegistry(name, hostname, port, user, password);
+    });
+    
+program.command('remove <name>')
+    .description('Removes registry from config')
+    .action((name)=>{
+        registriesManager.removeRegistry(name);
+    });
+    
 program.parse(process.argv);

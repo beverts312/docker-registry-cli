@@ -22,64 +22,58 @@ module.exports = ((options: any) => {
 });
 	
 function compareImage(name:string, tag:string, callback:(err:string, match:boolean)=>void){
-	var config = <Configuration> require('./configuration.json');
-	if (config.compare.length < 2){
-		callback("Must have atleast 2 registries to compare", false);
-	}
-	else {
-		getImages(name, tag, config, (err, images) =>{
-			if(err.length > 0){
-				for(var i = 0; i < err.length; i++){
-					console.log(err[i]);
-				}
-				callback('Error getting images, more details above', false);
+    var config = <Configuration> require('./configuration.json');
+	getImages(name, tag, config, (err, images) =>{
+        if(err.length > 0){
+	       for(var i = 0; i < err.length; i++){
+		      console.log(err[i]);
+            }
+            callback('Error getting images, more details above', false);
+	   }
+	   else{
+	       for(var i = 0; i < images.length - 1; i++){
+		      if(!compareImages(images[i], images[i + 1])){
+                callback('Image mismatch', false);
+              }
 			}
-			else{
-				for(var i = 0; i < images.length - 1; i++){
-					if(!compareImages(images[i], images[i + 1])){
-						callback('Image mismatch', false);
-					}
-				}
-				callback(null, true)
-			}
-		});
-	}
+			callback(null, true)
+		}
+	});
 }
 
 function getImages(name:string, tag:string, config:Configuration, callback:(err:string[], images:Manifest[])=>void){
-	var id  = config.compare[0];
+	var id  = config.registries[0];
 	var images = [];
 	var errors = [];
 	
-	for(var i = 0; i < config.compare.length -1; i++){
-		var id = config.compare[i];
-		var reg = new RegistryWrapper(new Registry(	config.registries[id].host, 
-												config.registries[id].port, 
-												config.registries[id].user, 
-												new Buffer(config.registries[id].password, 'base64').toString('ascii')));
-		reg.getManifest(name, tag, (err, res)=>{
-			if(err){
-				errors.push(err.message);
-			}
-			else{
-				images.push(res);
-			}
-		});
-	}
-	var id = config.compare.length - 1;
-	var reg = new RegistryWrapper(new Registry(	config.registries[id].host, 
-												config.registries[id].port, 
-												config.registries[id].user, 
-												new Buffer(config.registries[id].password, 'base64').toString('ascii')));
-	reg.getManifest(name, tag, (err, res)=>{
-		if(err){
-			errors.push(err.message);
-		}
-		else{
-			images.push(res);
-		}
-		callback(errors, images);	
-	});			
+	for(var i = 0; i < config.registries.length; i++){
+		var reg = new RegistryWrapper(new Registry( config.registries[i].name,	
+                                                config.registries[i].host, 
+												config.registries[i].port, 
+												config.registries[i].user, 
+												new Buffer(config.registries[i].password, 'base64').toString('ascii')));
+        if(i != config.registries.length -1){
+            reg.getManifest(name, tag, (err, res)=>{
+                if(err){
+				    errors.push(err.message);
+			    }
+			    else{
+				    images.push(res);
+			    }
+		    });    
+        }
+        else{
+            reg.getManifest(name, tag, (err, res)=>{
+		      if(err){
+			     errors.push(err.message);
+		      }
+		      else{
+			     images.push(res);
+		      }
+		      callback(errors, images);	
+	       });       
+        }
+	}			
 }
 
 function compareImages(one:Manifest, two:Manifest):boolean{
