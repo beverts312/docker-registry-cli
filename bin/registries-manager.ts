@@ -47,7 +47,7 @@ class RegistriesManager {
     getRegistries(){
         var registries = this.config.getRegistries();
         for(var i = 0; i < registries.length; i++){
-            registries[i].display();
+            this.displayRegistry(registries[i]);
         }
     }
 	
@@ -66,5 +66,9 @@ class RegistriesManager {
             }   
         });
     }   
+    
+    displayRegistry(registry:Registry){
+        console.log(registry.name + '     ' + registry.host + ':' + registry.port);
+    }
 }
 export = RegistriesManager;

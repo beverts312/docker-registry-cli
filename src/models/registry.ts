@@ -12,10 +12,6 @@ class Registry {
 		this.user = user;
 		this.password = password;
 	}
-    
-    display(){
-        console.log(this.name + '     ' + this.host + ':' + this.port);
-    }
 }
 
 export = Registry;

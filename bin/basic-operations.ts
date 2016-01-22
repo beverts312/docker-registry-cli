@@ -16,6 +16,7 @@ class BasicOperations {
 		    this.wrapper = new RegistryWrapper(registry);
         }
 		else{
+            console.log('Wrapper injected');
             this.wrapper = wrapper;
         }
 	}

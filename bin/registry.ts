@@ -39,6 +39,12 @@ program.command('compare <image> <tag>')
 	.action(require('./Compare'));
 
 //Config	
+program.command('ls')
+    .description('List registries')
+    .action(()=>{
+        registriesManager.getRegistries();
+    });
+
 program.command('add <name> <hostname> <port> <user> <password>')
     .description('Adds registry creds to config')
     .option('-u, --user <user>', 'Registry user')
@@ -47,7 +53,7 @@ program.command('add <name> <hostname> <port> <user> <password>')
         registriesManager.addRegistry(name, hostname, port, user, password);
     });
     
-program.command('remove <name>')
+program.command('rm <name>')
     .description('Removes registry from config')
     .action((name)=>{
         registriesManager.removeRegistry(name);
