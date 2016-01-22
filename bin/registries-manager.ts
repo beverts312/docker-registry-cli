@@ -25,7 +25,6 @@ class RegistriesManager {
             if(err){
                 console.log('Add registry failed');    
                 console.log(err.message);
-                process.exit(1);                    
             }
             else{
                 console.log('Added registry');
@@ -38,7 +37,6 @@ class RegistriesManager {
             if(err){
                 console.log('Remove registry failed');    
                 console.log(err.message);
-                process.exit(1);                    
             }
             else{
                 console.log('Removed registry ' + name);
@@ -54,7 +52,7 @@ class RegistriesManager {
     }
 	
     getDefaultRegistry(){
-        return this.config.getDefaultRegistry;    
+        return this.config.getDefaultRegistry();    
     }
     
     setDefaultRegistry(name:string){
@@ -62,7 +60,6 @@ class RegistriesManager {
             if(err){
                 console.log('Set default registry failed');    
                 console.log(err.message);
-                process.exit(1);                    
             }
             else{
                 console.log('Default registry is ' + name);
