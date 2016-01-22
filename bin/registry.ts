@@ -14,7 +14,7 @@ program.command('compare <image> <tag>')
 
 program.command('manifest <name> <tag>')
 	.description('Gets image manifest')
-	.option('-r, --registry-name <reg>', 'The name of the registry, defaults to ' + registriesManager.getDefaultRegistry())
+	.option('-r, --registry-name <reg>', 'The name of the registry to use')
 	.action((name, tag) => {
 		var basicOps = new BasicOperations();
 		basicOps.getManifest(name, tag);
@@ -22,6 +22,8 @@ program.command('manifest <name> <tag>')
 	
 program.command('add <name> <hostname> <port> <user> <password>')
     .description('Adds registry creds to config')
+    .option('-u, --user <user>', 'Registry user')
+    .option('-p, --password <password>', 'Registry Password')
     .action((name, hostname, port, user, password)=>{
         registriesManager.addRegistry(name, hostname, port, user, password);
     });
