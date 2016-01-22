@@ -1,8 +1,8 @@
 'use strict';
-import ImageCatalog = require('../models/ImageCatalog');
-import TagsList = require('../models/TagsList');
-import Manifest = require('../models/Manifest');
-import Registry = require('../models/Registry');
+import ImageCatalog = require('../models/image-catalog');
+import TagsList = require('../models/tags-list');
+import Manifest = require('../models/manifest');
+import Registry = require('../models/registry');
 
 interface IRegistryWrapper {
 	registry:Registry;

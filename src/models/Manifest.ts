@@ -1,5 +1,5 @@
-import Signature = require('./Signature');
-import FsLayer = require('./FsLayer');
+import Signature = require('./signature');
+import FsLayer = require('./fsLayer');
 
 class Manifest {
 	public schemaVersion:number;

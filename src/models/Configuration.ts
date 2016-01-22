@@ -1,4 +1,4 @@
-import Registry = require('./Registry');
+import Registry = require('./registry');
 
 class Configuration {
 	public registry: number;

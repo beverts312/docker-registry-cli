@@ -1,8 +1,8 @@
 'use strict';
 import fs = require('fs');
 
-import Registry = require('./models/Registry');
-import Configuration = require('./models/Configuration');
+import Registry = require('./models/registry');
+import Configuration = require('./models/configuration');
 import IConfigManager = require('./interfaces/IConfigManager');
 
 class ConfigManager implements IConfigManager {    

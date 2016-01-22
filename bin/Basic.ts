@@ -1,9 +1,9 @@
 'use strict';
-import ImageCatalog = require('../src/models/ImageCatalog');
-import TagsList = require('../src/models/TagsList');
-import Manifest = require('../src/models/Manifest');
-import Registry = require('../src/models/Registry');
-import RegistryWrapper =  require('../src/RegistryWrapper');
+import ImageCatalog = require('../src/models/image-catalog');
+import TagsList = require('../src/models/tags-list');
+import Manifest = require('../src/models/manifest');
+import Registry = require('../src/models/registry');
+import RegistryWrapper =  require('../src/registry-wrapper');
 
 
 class Basic {

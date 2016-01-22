@@ -1,5 +1,5 @@
 'use strict';
-import Registry = require('../models/Registry');
+import Registry = require('../models/registry');
 
 interface IConfigManager {
     getRegistries():Registry[];

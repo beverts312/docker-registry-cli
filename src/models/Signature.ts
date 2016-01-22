@@ -1,4 +1,4 @@
-import SignatureHeader = require('./SignatureHeader');
+import SignatureHeader = require('./signature-header');
 
 class Signature {
 	public header: SignatureHeader;

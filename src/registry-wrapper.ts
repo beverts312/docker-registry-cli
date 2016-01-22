@@ -1,10 +1,10 @@
 'use strict';
 import IRegistryWrapper = require('./interfaces/IRegistryWrapper');
-import ImageCatalog = require('./models/ImageCatalog');
-import TagsList = require('./models/TagsList');
-import Manifest = require('./models/Manifest');
-import Registry = require('./models/Registry');
-import Options = require('./models/Options');
+import ImageCatalog = require('./models/image-catalog');
+import TagsList = require('./models/tags-list');
+import Manifest = require('./models/manifest');
+import Registry = require('./models/registry');
+import Options = require('./models/options');
 
 import https = require('https');
 

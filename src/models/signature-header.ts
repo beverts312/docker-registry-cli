@@ -1,4 +1,4 @@
-import Jwk = require('./Jwk');
+import Jwk = require('./jwk');
 
 class SignatureHeader {
 	public jwk:Jwk;

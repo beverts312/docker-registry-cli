@@ -1,15 +1,26 @@
 'use strict';
-import Registry = require('../src/models/Registry');
-import ConfigManager = require('../src/ConfigManager');
+import Registry = require('../src/models/registry');
+import ConfigManager = require('../src/config-manager');
 
 class RegistriesManager {
     config:ConfigManager;    
-    constructor(){
-        this.config = new ConfigManager();
+    constructor(config?:ConfigManager){
+        if(!config){
+            this.config = new ConfigManager();        
+        }
+        else{
+            this.config = config;
+        }
     }
     
-	addRegistry(name:string, host:string, port:number, user:string, password:string){
-        var reg = new Registry(name, host, port, user, new Buffer(password).toString('base64'));
+	addRegistry(name:string, host:string, port:number, user?:string, password?:string){
+        var reg;
+        if(user && password){
+            reg = new Registry(name, host, port, user, new Buffer(password).toString('base64'));  
+        }
+        else{
+            reg = new Registry(name, host, port);
+        }
         this.config.addRegistry(reg, (err)=>{
             if(err){
                 console.log('Add registry failed');    

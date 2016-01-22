@@ -1,8 +1,8 @@
 'use strict';
 
 import program = require('commander');
-import Basic = require('./Basic');
-import RegistriesManager = require('./RegistriesManager');
+import Basic = require('./basic');
+import RegistriesManager = require('./registries-manager');
 
 var registriesManager = new RegistriesManager();                           
 
