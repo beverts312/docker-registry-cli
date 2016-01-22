@@ -1,7 +1,7 @@
 'use strict';
 
 import program = require('commander');
-import Basic = require('./basic');
+import BasicOperations = require('./basic-operations');
 import RegistriesManager = require('./registries-manager');
 
 var registriesManager = new RegistriesManager();                           
@@ -15,9 +15,9 @@ program.command('compare <image> <tag>')
 program.command('manifest <name> <tag>')
 	.description('Gets image manifest')
 	.option('-r, --registry-name <reg>', 'The name of the registry, defaults to ' + registriesManager.getDefaultRegistry())
-	.action((resource, args) => {
-		var basic = new Basic();
-		basic.processCommand(resource, args);
+	.action((name, tag) => {
+		var basicOps = new BasicOperations();
+		basicOps.getManifest(name, tag);
 	});
 	
 program.command('add <name> <hostname> <port> <user> <password>')
