@@ -1,3 +1,5 @@
+Note: This project is primarily developed in VSTS and I occasionally will merge the changes to github.  
+
 ## Docker Registry Tools  
 Tools for interacting with the Docker Resgirty v2 API.  
 To install: `npm install -g http://repo.baileyeverts.com/registry-tools-0.1.0.tgz`  
