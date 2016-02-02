@@ -1,6 +1,6 @@
 #### Catalog Help  
 ```
- Usage: catalog [options]
+ Usage: registry catalog [options]
 
   Lists all images in the registry
 
@@ -13,7 +13,7 @@
 
 #### Tags Help  
 ```
-  Usage: tags [options] <image>
+  Usage: registry tags [options] <image>
 
   Lists all tags for an image
 
@@ -26,7 +26,7 @@
 #### Manifest Help  
 ```
 
-  Usage: manifest [options] <name> <tag>
+  Usage: registry manifest [options] <name> <tag>
 
   Gets image manifest
 
