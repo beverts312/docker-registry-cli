@@ -4,9 +4,7 @@ import ImageCatalog = require('../src/models/image-catalog');
 import Registry = require('../src/models/registry');
 import Configuration = require('../src/models/configuration');
 		
-module.exports = ((options: any) => {
-    var image = options.image;
-	var tag = options.tag;
+module.exports = ((image, tag) => {
 	console.log('image: '+ image);
 	console.log('tag: ' + tag);
 	
