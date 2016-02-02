@@ -1,14 +1,6 @@
-#### Registry List Help  
-```
-  Usage: registry ls [options]
-
-  List registries
-
-  Options:
-    -h, --help  output usage information
-```  
-
 #### Registry Add Help  
+Adds a registry to your registry config.  
+<b>Note: You must add a registry to your config before trying to retrieve data from it</b>  
 ```
   Usage: registry add [options] <name> <hostname> <port> <user> <password>
 
@@ -21,6 +13,7 @@
 ```  
 
 #### Registry Remove Help  
+Removes the specified registry from your local config.  
 ```
   Usage: registry rm [options] <name>
 
@@ -28,4 +21,15 @@
 
   Options:
     -h, --help  output usage information
+```  
+
+#### Registry List Help  
+This method can be used to list all of the registries you have configured.  
 ```
+  Usage: registry ls [options]
+
+  List registries
+
+  Options:
+    -h, --help  output usage information
+```  
