@@ -47,3 +47,17 @@ To install: `npm install -g http://repo.baileyeverts.com/registry-tools-0.1.0.tg
     -h, --help                 output usage information
     -r, --registry <registry>  The name of the registry to use
 ```  
+
+#### Manifest Help  
+```
+
+  Usage: manifest [options] <name> <tag>
+
+  Gets image manifest
+
+  Options:
+
+    -h, --help                 output usage information
+    -r, --registry <registry>  The name of the registry to use
+
+```  
