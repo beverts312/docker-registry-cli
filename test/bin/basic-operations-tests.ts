@@ -33,7 +33,7 @@ describe('BasicOperations Suite -', ()=>{
     describe('getCatalog -', ()=>{   
         it('Should Call getCatalog', (done: () => void) => {
             wrapper.getCatalog = sandbox.stub().yields(null, new ImageCatalog());     
-            basicOps = new BasicOperations(wrapper);   
+            basicOps = new BasicOperations(null, wrapper);   
             basicOps.getCatalog();
             assert.isTrue(wrapper.getCatalog.called);
             done(); 
