@@ -1,6 +1,6 @@
 #### Registry Add Help  
 Adds a registry to your registry config.  
-<b>Note: You must add a registry to your config before trying to retrieve data from it</b>  
+***Note: You must add a registry to your config before trying to retrieve data from it***  
 ```
   Usage: registry add [options] <name> <hostname> <port> <user> <password>
 
