@@ -41,7 +41,7 @@ describe('BasicOperations Suite -', ()=>{
         
         it('Doesnt Crash On Error', (done: () => void) => {
             wrapper.getCatalog = sandbox.stub().yields(new Error('message'));     
-            basicOps = new BasicOperations(wrapper);   
+            basicOps = new BasicOperations(null, wrapper);   
             basicOps.getCatalog();
             assert.isTrue(wrapper.getCatalog.called);
             done(); 
@@ -51,7 +51,7 @@ describe('BasicOperations Suite -', ()=>{
     describe('getTags -', ()=>{   
         it('Should Call getTags', (done: () => void) => {
             wrapper.getTags = sandbox.stub().yields(null, new TagsList());     
-            basicOps = new BasicOperations(wrapper);   
+            basicOps = new BasicOperations(null, wrapper);   
             basicOps.getTags('image');
             assert.isTrue(wrapper.getTags.called);
             done(); 
@@ -59,7 +59,7 @@ describe('BasicOperations Suite -', ()=>{
         
         it('Doesnt Crash On Error', (done: () => void) => {
             wrapper.getTags = sandbox.stub().yields(new Error('message'));     
-            basicOps = new BasicOperations(wrapper);   
+            basicOps = new BasicOperations(null, wrapper);   
             basicOps.getTags('image');
             assert.isTrue(wrapper.getTags.called);
             done(); 
@@ -69,7 +69,7 @@ describe('BasicOperations Suite -', ()=>{
     describe('getManifest -', ()=>{   
         it('Should Call getManifest', (done: () => void) => {
             wrapper.getManifest = sandbox.stub().yields(null, new Manifest());     
-            basicOps = new BasicOperations(wrapper);   
+            basicOps = new BasicOperations(null, wrapper);   
             basicOps.getManifest('image');
             assert.isTrue(wrapper.getManifest.called);
             done(); 
@@ -77,7 +77,7 @@ describe('BasicOperations Suite -', ()=>{
         
         it('Doesnt Crash On Error', (done: () => void) => {
             wrapper.getManifest = sandbox.stub().yields(new Error('message'));     
-            basicOps = new BasicOperations(wrapper);   
+            basicOps = new BasicOperations(null, wrapper);   
             basicOps.getManifest('image');
             assert.isTrue(wrapper.getManifest.called);
             done(); 

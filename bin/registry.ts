@@ -9,25 +9,25 @@ var registriesManager = new RegistriesManager();
 //Single Registry
 program.command('catalog')
 	.description('Lists all images in the registry')
-	.option('-r, --registry-name <reg>', 'The name of the registry to use')
-	.action((name, tag) => {
-		var basicOps = new BasicOperations();
+	.option('-r, --registry <registry>', 'The name of the registry to use')
+	.action((args) => {
+		var basicOps = new BasicOperations(args);
 		basicOps.getCatalog();
 	});
     
 program.command('tags <image>')
 	.description('Lists all tags for an image')
-	.option('-r, --registry-name <reg>', 'The name of the registry to use')
-	.action((image) => {
-		var basicOps = new BasicOperations();
+	.option('-r, --registry <registry>', 'The name of the registry to use')
+	.action((image, args) => {
+		var basicOps = new BasicOperations(args);
 		basicOps.getTags(image);
 	});  
     
 program.command('manifest <name> <tag>')
 	.description('Gets image manifest')
-	.option('-r, --registry-name <reg>', 'The name of the registry to use')
-	.action((name, tag) => {
-		var basicOps = new BasicOperations();
+	.option('-r, --registry <registry>', 'The name of the registry to use')
+	.action((name, tag, args) => {
+		var basicOps = new BasicOperations(args);
 		basicOps.getManifest(name, tag);
 	});
     

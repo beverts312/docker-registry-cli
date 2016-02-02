@@ -4,14 +4,28 @@ import TagsList = require('../src/models/tags-list');
 import Manifest = require('../src/models/manifest');
 import Registry = require('../src/models/registry');
 import RegistryWrapper =  require('../src/registry-wrapper');
+import ConfigManager = require('../src/config-manager');
 
 class BasicOperations {
     wrapper:RegistryWrapper;
-	
-	constructor(wrapper?:RegistryWrapper){
+    
+	constructor(args: any, wrapper?:RegistryWrapper){
         if(!wrapper){
-            var config = require('./configuration.json');
-		    var registry = config.registries[config.registry];
+		    var registry;
+            var config = require('./configuration.json');                
+            registry = config.registries[config.registry]; 
+            if( args.registry ){
+                var configManager = new ConfigManager(); 
+                var regIndex = configManager.getRegistryIndex(args.registry);               
+                if(regIndex != -1){
+                    console.log('Overriding default registry');
+                    registry = config.registries[regIndex];
+                }
+                else{
+                    console.log('Error: ' + args.registry + ' is not a registry you have added');
+                    process.exit(1);                    
+                }
+            }  
             registry.password = new Buffer(registry.password, 'base64').toString('ascii');
 		    this.wrapper = new RegistryWrapper(registry);
         }
