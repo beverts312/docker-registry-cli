@@ -36,7 +36,7 @@ program.command('compare <image> <tag>')
 	.description('Compares image in multiple repositories')
 	.option('-i, --image <image>', 'The name of the image')
 	.option('-t, --tag <tag>', 'The image tag')
-	.action(require('./Compare'));
+	.action(require('./compare'));
 
 //Config	
 program.command('ls')
