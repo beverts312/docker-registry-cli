@@ -70,6 +70,20 @@ class RegistryWrapper implements IRegistryWrapper {
 			});
 		}).end();					
 	}
+    
+    deleteLayer(name:string, digest:string, callback:(err:Error)=>void){
+        this.options.path = '/v2/' + name + '/blobs/' + digest;
+		this.options.method = 'DELETE';
+
+		https.request(this.options, (res) => {
+  			if(res.statusCode == 202){
+                callback(null);
+            }
+            else{
+                callback(new Error('Could not delete layer'));
+            }	
+        }).end();	
+    }
 	
 }
 export = RegistryWrapper;

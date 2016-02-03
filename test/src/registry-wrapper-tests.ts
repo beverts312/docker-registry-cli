@@ -67,4 +67,25 @@ describe('Registry Wrapper Suite -', ()=>{
         });
     });
     
+    it('DeleteLayer Failed Test -', (done: () => void) => {
+		var response = new PassThrough();
+		response.end();
+        var req = new PassThrough();
+        this.request.callsArgWith(1,response).returns(req);
+        wrapper.deleteLayer('name','digest',(err)=>{  
+            done();
+        });
+    });
+
+    /*it('DeleteLayer Test -', (done: () => void) => {
+		var response = https.
+		response.
+        response.end();
+        var req = new PassThrough();
+        this.request.callsArgWith(1,response).returns(req);
+        wrapper.deleteLayer('name','digest',(err)=>{  
+            done();
+        });
+    });*/
+
 });
