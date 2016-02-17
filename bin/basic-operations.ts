@@ -41,7 +41,10 @@ class BasicOperations {
 				console.log(err.message);
 			}
 			else{
-				console.log(res);
+				console.log('Images: ');
+				for(var i = 0; i < res.repositories.length; i++){
+					console.log(res.repositories[i]);
+				}
 			}
 		});	
 	}
