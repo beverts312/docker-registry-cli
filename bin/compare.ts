@@ -21,22 +21,24 @@ module.exports = ((image, tag) => {
 	
 function compareImage(name:string, tag:string, callback:(err:string, match:boolean)=>void){
     var config = <Configuration> require('./configuration.json');
-	getImages(name, tag, config, (err, images) =>{
-        if(err.length > 0){
-	       for(var i = 0; i < err.length; i++){
-		      console.log(err[i]);
-            }
-            callback('Error getting images, more details above', false);
-	   }
-	   else{
-	       for(var i = 0; i < images.length - 1; i++){
-		      if(!compareImages(images[i], images[i + 1])){
-                callback('Image mismatch', false);
-              }
+	if( config.registries.length > 0){
+		getImages(name, tag, config, (err, images) =>{
+        	if(err.length > 0){
+            	callback('Error retrieving image manifest(s)', false);
+	   		}
+	   		else{
+	       		for(var i = 0; i < images.length - 1; i++){
+		      		if(!compareImages(images[i], images[i + 1])){
+                		callback('Image mismatch', false);
+              		}
+				}
+				callback(null, true)
 			}
-			callback(null, true)
-		}
-	});
+		});	
+	}
+	else{
+		callback("Must have atleast 2 registriesy configured to compare", false);
+	}
 }
 
 function getImages(name:string, tag:string, config:Configuration, callback:(err:string[], images:Manifest[])=>void){
@@ -78,9 +80,7 @@ function compareImages(one:Manifest, two:Manifest):boolean{
 	if(one.fsLayers.length == two.fsLayers.length){
 		for(var i = 0; i < one.fsLayers.length; i++){
 			if(one.fsLayers[i].blobSum != two.fsLayers[i].blobSum){
-				console.log('Layer digest mismatch');
-				console.log(one.fsLayers[i].blobSum);
-				console.log(two.fsLayers[i].blobSum);
+				console.log('Layer digest mismatch: ' + one.fsLayers[i].blobSum + ' != ' + two.fsLayers[i].blobSum);
 				return false;	
 			}
 		}
