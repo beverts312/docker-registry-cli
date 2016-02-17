@@ -11,6 +11,7 @@ import ImageCatalog = require('../../src/models/image-catalog');
 import TagsList = require('../../src/models/tags-list');
 import Registry = require('../../src/models/registry');
 import Manifest = require('../../src/models/manifest');
+import FsLayer = require('../../src/models/fsLayer');
 
 var assert = Chai.assert;
 
@@ -32,7 +33,9 @@ describe('BasicOperations Suite -', ()=>{
     
     describe('getCatalog -', ()=>{   
         it('Should Call getCatalog', (done: () => void) => {
-            wrapper.getCatalog = sandbox.stub().yields(null, new ImageCatalog());     
+            var catalog = new ImageCatalog();
+            catalog.repositories = ['imageone','imagetwo'];
+            wrapper.getCatalog = sandbox.stub().yields(null, catalog);     
             basicOps = new BasicOperations(null, wrapper);   
             basicOps.getCatalog();
             assert.isTrue(wrapper.getCatalog.called);
@@ -50,7 +53,9 @@ describe('BasicOperations Suite -', ()=>{
     
     describe('getTags -', ()=>{   
         it('Should Call getTags', (done: () => void) => {
-            wrapper.getTags = sandbox.stub().yields(null, new TagsList());     
+            var tagsList = new TagsList();
+            tagsList.tags = ['tagone', 'tagtwo'];
+            wrapper.getTags = sandbox.stub().yields(null, tagsList);     
             basicOps = new BasicOperations(null, wrapper);   
             basicOps.getTags('image');
             assert.isTrue(wrapper.getTags.called);
@@ -68,7 +73,9 @@ describe('BasicOperations Suite -', ()=>{
     
     describe('getManifest -', ()=>{   
         it('Should Call getManifest', (done: () => void) => {
-            wrapper.getManifest = sandbox.stub().yields(null, new Manifest());     
+            var manifest = new Manifest();
+            manifest.fsLayers = [new FsLayer()];
+            wrapper.getManifest = sandbox.stub().yields(null, manifest);     
             basicOps = new BasicOperations(null, wrapper);   
             basicOps.getManifest('image');
             assert.isTrue(wrapper.getManifest.called);
