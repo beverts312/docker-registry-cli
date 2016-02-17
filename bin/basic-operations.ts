@@ -52,7 +52,11 @@ class BasicOperations {
 				console.log(err.message);
 			}
 			else{
-				console.log(res);
+				console.log('Name: ' + res.name);
+				console.log('Tags: ');
+				for(var i = 0; i < res.tags.length; i++){
+					console.log(res.tags[i]);
+				}
 			}	
 		});
 	}
