@@ -74,15 +74,19 @@ class RegistryWrapper implements IRegistryWrapper {
     deleteLayer(name:string, digest:string, callback:(err:Error)=>void){
         this.options.path = '/v2/' + name + '/blobs/' + digest;
 		this.options.method = 'DELETE';
-
-		https.request(this.options, (res) => {
-  			if(res.statusCode == 202){
-                callback(null);
-            }
-            else{
-                callback(new Error('Could not delete layer'));
-            }	
-        }).end();	
+		var req = https.request(this.options, (res) => {
+			var str = '';
+			res.on('data', (chunk)=>{
+				str += chunk;
+			});
+			res.on('end', ()=>{
+				callback(null);
+			});
+        });
+		req.end();	
+		req.on('error', (error)=>{
+                callback(new Error('Could not delete layer'));				
+		});
     }
 	
 }

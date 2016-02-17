@@ -67,8 +67,9 @@ describe('Registry Wrapper Suite -', ()=>{
         });
     });
     
-    it('DeleteLayer Failed Test -', (done: () => void) => {
+    it('DeleteLayer Test -', (done: () => void) => {
 		var response = new PassThrough();
+		response.write(JSON.stringify({'statusCode': '202'}));        
 		response.end();
         var req = new PassThrough();
         this.request.callsArgWith(1,response).returns(req);
@@ -76,16 +77,16 @@ describe('Registry Wrapper Suite -', ()=>{
             done();
         });
     });
-
-    /*it('DeleteLayer Test -', (done: () => void) => {
-		var response = https.
-		response.
-        response.end();
+    
+    it('DeleteLayer Failed Test -', (done: () => void) => {    
+        var response = new PassThrough();
+		response.end();
         var req = new PassThrough();
         this.request.callsArgWith(1,response).returns(req);
         wrapper.deleteLayer('name','digest',(err)=>{  
+            assert.deepEqual(err.message, 'Could not delete layer');             
             done();
         });
-    });*/
-
+        req.emit('error', 'test');
+    });
 });
