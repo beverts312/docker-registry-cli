@@ -12,7 +12,7 @@ class BasicOperations {
 	constructor(args: any, wrapper?:RegistryWrapper){
         if(!wrapper){
 		    var registry;
-            var config = require('./configuration.json');                
+            var config = require('../config/configuration.json');                
             registry = config.registries[config.registry]; 
             if( args.registry ){
                 var configManager = new ConfigManager(); 

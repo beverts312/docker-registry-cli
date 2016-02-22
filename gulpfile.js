@@ -16,7 +16,7 @@ var del = require('del');
 var Chai = require('chai');
 var header = require('gulp-header');
 
-var gulpConfig = require('./gulp-config.json');
+var gulpConfig = require('./config/gulp-config.json');
 
 gulp.task('install-typings', function (cb) {
     tsd({

@@ -9,7 +9,7 @@ class ConfigManager implements IConfigManager {
     config:Configuration;
     
     constructor(){
-        this.config = require('../bin/configuration.json');
+        this.config = require('../config/configuration.json');
     }
     
     getRegistries():Registry[]{
@@ -69,7 +69,7 @@ class ConfigManager implements IConfigManager {
     }
     
 	private updateConfiguration(callback:(err:Error)=>void){
-		fs.writeFile(require.resolve('../bin/configuration.json'), JSON.stringify(this.config), (err) =>{
+		fs.writeFile(require.resolve('../config/configuration.json'), JSON.stringify(this.config), (err) =>{
 		  callback(err);
 		});
 	}

@@ -20,7 +20,7 @@ module.exports = ((image, tag) => {
 });
 	
 function compareImage(name:string, tag:string, callback:(err:string, match:boolean)=>void){
-    var config = <Configuration> require('./configuration.json');
+    var config = <Configuration> require('../config/configuration.json');
 	if( config.registries.length > 0){
 		getImages(name, tag, config, (err, images) =>{
         	if(err.length > 0){
