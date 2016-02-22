@@ -1,3 +1,24 @@
 {
-	
+	"getCatalog": {
+		"uri": "/v2/_catalog",
+		"method": "GET",
+		"params": []	
+	},
+	"getTags": {
+		"uri": "/v2/{0}/tags/list",
+		"method": "GET",
+		"params": [
+			"image"
+		]	
+	},
+	"getManifest": {
+		"uri":  "/v2/{0}/manifests/{1}",
+		"method": "GET",
+		"params": [	"image", "tag" ]	
+	},
+	"deleteLayer": {
+		"uri":  "/v2/{0}/blobs/{1}",
+		"method": "GET",
+		"params": [	"name", "digest" ]	
+	}
 }
