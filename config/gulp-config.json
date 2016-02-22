@@ -58,5 +58,11 @@
 		"spec": {
 			"stdout": "-"
 		}
-	}
+	},
+    "tmpFiles": [
+        "./typings/**",
+        "./node_modules/**",
+        "./coverage/**",        
+        "./xunit.xml"
+    ]
 }

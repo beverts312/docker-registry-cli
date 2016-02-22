@@ -28,6 +28,11 @@ gulp.task('install-typings', function (cb) {
 gulp.task('clean', function (cb) {
     del(gulpConfig.allTranspiledJavaScript, cb);
 });
+
+gulp.task('super-clean', ['clean'], function (cb) {
+    del(gulpConfig.tmpFiles, cb); 
+});
+
 gulp.task('tslint', function () {
     return gulp.src(gulpConfig.typeScriptSourceAndTests)
         .pipe(tslint())
