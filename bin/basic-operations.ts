@@ -71,13 +71,14 @@ class BasicOperations {
 				console.log(err.message);
 			}
 			else{
+				console.log('Id: ' + res.id);
 				console.log('Name: ' + res.name);
 				console.log('Tag: ' + res.tag);
 				console.log('Architecture: ' + res.architecture);
 				console.log('Schema Version: ' + res.schemaVersion);
-				console.log('FsLayers: ');
-				for(var i = 0; i < res.fsLayers.length; i++){
-					console.log('[' + i + ']: ' + res.fsLayers[i].blobSum);
+				console.log('Layers: ');
+				for(var i = 0; i < res.layers.length; i++){
+					console.log('[' + i + ']: ' + res.layers[i]);
 				}
 			}	
 		});

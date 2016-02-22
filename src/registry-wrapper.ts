@@ -4,9 +4,10 @@ import https = require('https');
 import IRegistryWrapper = require('./interfaces/IRegistryWrapper');
 import Registry = require('./models/registry');
 import Options = require('./models/options');
+import Manifest = require('./models/manifest');
 import ImageCatalog = require('./models/api/image-catalog');
 import TagsList = require('./models/api/tags-list');
-import Manifest = require('./models/api/manifest');
+import apiManifest = require('./models/api/manifest');
 
 
 class RegistryWrapper implements IRegistryWrapper {
@@ -67,7 +68,7 @@ class RegistryWrapper implements IRegistryWrapper {
     			str += chunk;
   			});
 			res.on('end', () =>{
-				callback(null, <Manifest> JSON.parse(str));
+				callback(null, new Manifest(<apiManifest> JSON.parse(str)));
 			});
 		}).end();					
 	}
