@@ -7,11 +7,11 @@ import Sinon = require('sinon');
 
 import BasicOperations = require('../../bin/basic-operations');
 import RegistryWrapper = require('../../src/registry-wrapper');
-import ImageCatalog = require('../../src/models/image-catalog');
-import TagsList = require('../../src/models/tags-list');
 import Registry = require('../../src/models/registry');
-import Manifest = require('../../src/models/manifest');
-import FsLayer = require('../../src/models/fsLayer');
+import ImageCatalog = require('../../src/models/api/image-catalog');
+import TagsList = require('../../src/models/api/tags-list');
+import FsLayer = require('../../src/models/api/fsLayer');
+import Manifest = require('../../src/models/api/manifest');
 
 var assert = Chai.assert;
 

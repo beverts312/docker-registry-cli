@@ -1,12 +1,13 @@
 'use strict';
+import https = require('https');
+
 import IRegistryWrapper = require('./interfaces/IRegistryWrapper');
-import ImageCatalog = require('./models/image-catalog');
-import TagsList = require('./models/tags-list');
-import Manifest = require('./models/manifest');
 import Registry = require('./models/registry');
 import Options = require('./models/options');
+import ImageCatalog = require('./models/api/image-catalog');
+import TagsList = require('./models/api/tags-list');
+import Manifest = require('./models/api/manifest');
 
-import https = require('https');
 
 class RegistryWrapper implements IRegistryWrapper {
 	registry:Registry;

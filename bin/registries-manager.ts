@@ -1,6 +1,6 @@
 'use strict';
-import Registry = require('../src/models/registry');
 import ConfigManager = require('../src/config-manager');
+import Registry = require('../src/models/registry');
 
 class RegistriesManager {
     config:ConfigManager;    

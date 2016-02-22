@@ -1,8 +1,9 @@
 import RegistryWrapper = require('../src/registry-wrapper');
-import Manifest = require('../src/models/manifest');
-import ImageCatalog = require('../src/models/image-catalog');
 import Registry = require('../src/models/registry');
 import Configuration = require('../src/models/configuration');
+import Manifest = require('../src/models/api/manifest');
+import ImageCatalog = require('../src/models/api/image-catalog');
+
 		
 module.exports = ((image, tag) => {
 	console.log('image: '+ image);

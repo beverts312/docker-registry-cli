@@ -9,9 +9,9 @@ var PassThrough = require('stream').PassThrough;
 
 import RegistryWrapper = require('../../src/registry-wrapper');
 import Registry = require('../../src/models/registry');
-import Manifest = require('../../src/models/manifest');
-import Catalog = require('../../src/models/image-catalog');
-import TagsList = require('../../src/models/tags-list');
+import Manifest = require('../../src/models/api/manifest');
+import Catalog = require('../../src/models/api/image-catalog');
+import TagsList = require('../../src/models/api/tags-list');
 
 
 var assert = Chai.assert;

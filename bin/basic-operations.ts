@@ -1,10 +1,11 @@
 'use strict';
-import ImageCatalog = require('../src/models/image-catalog');
-import TagsList = require('../src/models/tags-list');
-import Manifest = require('../src/models/manifest');
-import Registry = require('../src/models/registry');
 import RegistryWrapper =  require('../src/registry-wrapper');
 import ConfigManager = require('../src/config-manager');
+import Registry = require('../src/models/registry');
+import ImageCatalog = require('../src/models/api/image-catalog');
+import TagsList = require('../src/models/api/tags-list');
+import Manifest = require('../src/models/api/manifest');
+
 
 class BasicOperations {
     wrapper:RegistryWrapper;
